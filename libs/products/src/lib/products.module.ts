@@ -10,8 +10,13 @@ import { ButtonModule } from 'primeng/button';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 
 import {CheckboxModule} from 'primeng/checkbox';
+import {RatingModule} from 'primeng/rating';
+import {InputNumberModule} from 'primeng/inputnumber';
+
 import { FormsModule } from '@angular/forms';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
+
+import { UiModule } from '@bluebits/ui'
 
 const routes : Routes = [
   {
@@ -33,8 +38,12 @@ const routes : Routes = [
     OrdersModule, 
     RouterModule.forChild(routes), 
     CheckboxModule,
+    InputNumberModule,
     ButtonModule,
-    FormsModule],
+    RatingModule,
+    FormsModule,
+    UiModule],
+    
   declarations: [
     ProductsSearchComponent,
     CategoriesBannerComponent,
