@@ -8,10 +8,13 @@ import { ProductItemComponent } from './components/product-item/product-item.com
 import { FeaturedProductsComponent } from './components/featured-products/featured-products.component';
 import { ButtonModule } from 'primeng/button';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 import {CheckboxModule} from 'primeng/checkbox';
 import {RatingModule} from 'primeng/rating';
 import {InputNumberModule} from 'primeng/inputnumber';
+import {ToastModule} from 'primeng/toast'
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { FormsModule } from '@angular/forms';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
@@ -34,14 +37,17 @@ const routes : Routes = [
 ]
 @NgModule({
   imports: [
+    BrowserAnimationsModule,
     CommonModule, 
     OrdersModule, 
     RouterModule.forChild(routes), 
     CheckboxModule,
     InputNumberModule,
+    ToastModule,
     ButtonModule,
     RatingModule,
     FormsModule,
+    
     UiModule],
     
   declarations: [
@@ -59,6 +65,7 @@ const routes : Routes = [
     FeaturedProductsComponent,
     ProductsListComponent,
     ProductPageComponent
-  ]
+  ],
+  providers: [MessageService]
 })
 export class ProductsModule {}
