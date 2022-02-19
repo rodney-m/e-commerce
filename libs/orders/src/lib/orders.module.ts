@@ -11,12 +11,20 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import { ButtonModule } from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
+
+import { InputTextModule } from 'primeng/inputtext';
+import { InputMaskModule } from 'primeng/inputmask';
+import { DropdownModule } from 'primeng/dropdown';
 
 const routes :Routes = [
   {
     path : 'cart',
     component: CartPageComponent
+  },{
+    path : 'checkout',
+    component: CheckoutPageComponent
   }
 ]
 @NgModule({
@@ -26,11 +34,15 @@ const routes :Routes = [
     BadgeModule, 
     ButtonModule, 
     InputNumberModule,
-    ToastModule, 
+    ToastModule,
+    InputTextModule,
+    InputMaskModule,
+    DropdownModule,
+    ReactiveFormsModule, 
     RouterModule.forChild(routes)
   ],
-  declarations: [CartIconComponent, CartPageComponent, OrderSummaryComponent],
-  exports: [CartIconComponent, CartPageComponent, OrderSummaryComponent, ],
+  declarations: [CartIconComponent, CartPageComponent, OrderSummaryComponent, CheckoutPageComponent],
+  exports: [CartIconComponent, CartPageComponent, OrderSummaryComponent, CheckoutPageComponent, ],
 })
 export class OrdersModule {
   constructor(cartService: CartService){
