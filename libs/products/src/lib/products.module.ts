@@ -14,7 +14,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {RatingModule} from 'primeng/rating';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {ToastModule} from 'primeng/toast'
-import { ConfirmationService, MessageService } from 'primeng/api';;
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { FormsModule } from '@angular/forms';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
@@ -47,6 +47,7 @@ const routes : Routes = [
     ButtonModule,
     RatingModule,
     FormsModule,
+    
     UiModule],
     
   declarations: [
