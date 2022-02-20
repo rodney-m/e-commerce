@@ -15,7 +15,7 @@ export class UsersFormComponent implements OnInit {
   form: FormGroup;
   isSubmitted = false;
   editmode = false;
-  currentUserId: string;
+  currentUserId ='';
   countries = [];
 
   constructor(
@@ -128,7 +128,6 @@ export class UsersFormComponent implements OnInit {
       return;
     }
     const user: User = {
-      id: this.currentUserId,
       name: this.userForm.name.value,
       email: this.userForm.email.value,
       phone: this.userForm.phone.value,
@@ -137,11 +136,15 @@ export class UsersFormComponent implements OnInit {
       apartment: this.userForm.apartment.value,
       zip: this.userForm.zip.value,
       city: this.userForm.city.value,
-      country: this.userForm.country.value
+      country: this.userForm.country.value,
+      
     };
+    
     if (this.editmode) {
+      user.id = this.currentUserId;
       this._updateUser(user);
     } else {
+      user.password= this.userForm.password.value
       this._addUser(user);
     }
   }

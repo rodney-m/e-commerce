@@ -8,6 +8,7 @@ import { OrderItem } from '../../models/order-item';
 import { CartService } from '../../services/cart.service';
 import { OrdersService } from '../../services/orders.service';
 import { ORDER_STATUS } from '../../order.constants';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'orders-checkout-page',
   templateUrl: './checkout-page.component.html'
@@ -18,12 +19,13 @@ export class CheckoutPageComponent implements OnInit {
     private usersService: UsersService,
     private formBuilder: FormBuilder,
     private cartService: CartService,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private messageService : MessageService
   ) {}
   checkoutFormGroup: FormGroup;
   isSubmitted = false;
   orderItems: OrderItem[] = [];
-  userId = '609d65943373711346c5e950';
+  userId = '62115e1c88cb69fd28bded9c';
   countries = [];
 
   ngOnInit(): void {
@@ -89,7 +91,11 @@ export class CheckoutPageComponent implements OnInit {
         this.router.navigate(['/success']);
       },
       () => {
-        //display some message to user
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to place the order'
+        });
       }
     );
   }
