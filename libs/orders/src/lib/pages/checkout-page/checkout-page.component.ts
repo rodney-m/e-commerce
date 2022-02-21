@@ -7,9 +7,8 @@ import { Order } from '../../models/order';
 import { OrderItem } from '../../models/order-item';
 import { CartService } from '../../services/cart.service';
 import { OrdersService } from '../../services/orders.service';
-import { ORDER_STATUS } from '../../order.constants';
 import { MessageService } from 'primeng/api';
-import { take, takeUntil } from 'rxjs/operators';
+import {  takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 @Component({
   selector: 'orders-checkout-page',
