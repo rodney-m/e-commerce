@@ -11,11 +11,12 @@ import { ProductsModule } from '@bluebits/products';
 import { UiModule } from '@bluebits/ui';
 import { AccordionModule } from 'primeng/accordion';
 import { NavComponent } from './shared/nav/nav.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { OrdersModule } from '@bluebits/orders';
-import { UsersModule } from '@bluebits/users';
+import { JwtInterceptor, UsersModule } from '@bluebits/users';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { MessageService } from 'primeng/api';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -42,7 +43,7 @@ const routes: Routes = [
     OrdersModule,
     UsersModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

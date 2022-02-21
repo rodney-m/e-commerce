@@ -4,25 +4,39 @@ import { fetch } from '@nrwl/angular';
 
 import * as UsersFeature from './users.reducer';
 import * as UsersActions from './users.actions';
+import { concat, of } from 'rxjs';
+import { catchError, concatMap, map } from 'rxjs/operators';
+import { LocalstorageService } from '../services/localstorage.service';
+import { UsersService } from '../services/users.service';
 
 @Injectable()
 export class UsersEffects {
-  init$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(UsersActions.init),
-      fetch({
-        run: (action) => {
-          // Your custom service 'load' logic goes here. For now just return a success action...
-          return UsersActions.loadUsersSuccess({ users: [] });
-        },
 
-        onError: (action, error) => {
-          console.error('Error', error);
-          return UsersActions.loadUsersFailure({ error });
+  buildUserSession$ = createEffect(() => this.actions$.pipe(
+    ofType(UsersActions.buildUserSession),
+    concatMap(()=> {
+      if(this.localStorageService.isValidToken){
+        const userId = this.localStorageService.getUserIdFromToken()
+        if(userId){
+          return this.usersService.getUser(userId).pipe(
+            map((user) => {
+              return UsersActions.buildUserSessionSuccess({user: user})
+            }), 
+            catchError(() => of(UsersActions.buildUserSessionFailed()))
+          );
+        } else{
+          return of(UsersActions.buildUserSessionFailed())
         }
-      })
-    )
-  );
+      } else {
+        return of(UsersActions.buildUserSessionFailed())
+      }
+    })
+  ))
 
-  constructor(private actions$: Actions) {}
+  constructor(
+    private actions$: Actions,
+    private localStorageService : LocalstorageService,
+    private usersService : UsersService
+    ) {}
+  
 }
